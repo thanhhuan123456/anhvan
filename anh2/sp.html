@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sp.css">
+    <title>Anh</title>
+</head>
+<body>
+    <ul class="container">
+        <li>
+            <img src="image/2.jpg" alt="Hình ảnh London">
+            <div class="content">
+                <span>
+                    <h2>London</h2>
+                    <p>The picture captures a vibrant night view of London, showcasing iconic landmarks like Big Ben and the London Eye. 
+                        It likely depicts the city from a high vantage point, with bright lights illuminating the scene.
+                        While no people are clearly visible, one can imagine that they are enjoying the lively atmosphere, sightseeing, or walking around. 
+                        Overall, the image conveys a sense of energy and beauty that characterizes London at night.</p>
+                </span>
+            </div>
+        </li>
+        <li>
+            <img src="image/4.jpg" alt="Hình ảnh Sapa">
+            <div class="content">
+                <span>
+                    <h2>Sapa</h2>
+                    <p>The picture depicts a majestic natural landscape of mountainous regions, featuring lush green hills and clouds hovering over the mountain peaks. 
+                        A small village is nestled within the scenery, with warm-colored houses standing out against the sky and white clouds. 
+                        The gentle light of dawn or dusk creates a dreamy, peaceful atmosphere. 
+                        This scene evokes feelings of relaxation and a connection with nature.</p>
+                </span>
+            </div>
+        </li>
+    </ul>
+   <script>
+        const items = document.querySelectorAll('.container li');
+
+        items.forEach(li => {
+            li.addEventListener('click', () => {
+                const isFullscreen = li.classList.contains('fullscreen');
+                // Đóng tất cả ảnh đang mở
+                document.querySelectorAll('.container li').forEach(el => {
+                    el.classList.remove('fullscreen');
+                    const close = el.querySelector('.close-btn');
+                    if (close) close.remove();
+                });
+
+                // Nếu chưa mở thì mở ảnh này
+                if (!isFullscreen) {
+                    li.classList.add('fullscreen');
+                    const close = document.createElement('div');
+                    close.className = 'close-btn';
+                    close.innerHTML = '&times;';
+                    li.appendChild(close);
+
+                    // Khi bấm nút đóng
+                    close.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        li.classList.remove('fullscreen');
+                        close.remove();
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

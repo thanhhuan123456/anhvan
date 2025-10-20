@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: #ffc851;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Danh sách ảnh nhỏ góc phải */
+.container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    z-index: 10;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Ảnh nhỏ */
+.container li {
+    position: relative;
+    overflow: hidden;
+    width: 130px;
+    height: 180px;
+    border-radius: 16px;
+    cursor: pointer;
+    border: 1.2px solid #eee;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+}
+
+/* Ảnh nhỏ hiển thị */
+.container li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+/* Khi click → full màn hình */
+.container li.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    border-radius: 0;
+    margin: 0;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: zoomIn 0.6s ease;
+}
+
+/* Hiệu ứng phóng to */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Ảnh full màn hình */
+.container li.fullscreen img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* phủ toàn màn hình, không để viền đen */
+    object-position: center; /* canh giữa */
+    image-rendering: high-quality;
+    transition: all 0.6s ease;
+    z-index: 1;
+}
+
+/* Nội dung mô tả ảnh */
+.container li .content {
+    position: absolute;
+    bottom: 60px;       /* nằm ở góc dưới */
+    left: 80px;         /* cách lề trái */
+    color: #fff;
+    text-align: left;
+    opacity: 0;
+    width: 40%;
+    max-width: 600px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(20px);
+    z-index: 2;
+}
+
+/* Khi fullscreen thì hiện chữ */
+.container li.fullscreen .content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Tiêu đề ảnh */
+.container li .content h2 {
+    font-size: 40px;
+    margin-bottom: 14px;
+    font-weight: bold;
+}
+
+/* Mô tả */
+.container li .content p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Nút đóng (X) */
+.close-btn {
+    position: fixed;
+    top: 25px;
+    right: 35px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.8;
+    z-index: 10000;
+    transition: 0.3s;
+    display: none;
+}
+
+.close-btn:hover {
+    opacity: 1;
+}
